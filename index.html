@@ -62,26 +62,26 @@
     <script>
 
         // hide notify area
-        document.getElementById("match-up").style.display= "none";
-        document.getElementById("unequal").style.display="none";
+        document.getElementById("match-up").style.display = "none";
+        document.getElementById("unequal").style.display = "none";
 
         // generate pin
-        const generateBtn= document.getElementById("generate-pin");
+        const generateBtn = document.getElementById("generate-pin");
         generateBtn.addEventListener("click", function(){
-        const randomNumber=document.getElementById("random-number").value;
-        const randomAmount=parseFloat(randomNumber);
-        let randomNewAmount= Math.floor(Math.random (randomAmount) * 9999)+1000;
+        const randomNumber = document.getElementById("random-number").value;
+        const randomAmount = parseFloat(randomNumber);
+        let randomNewAmount = Math.floor(Math.random (randomAmount) * 9999)+1000;
         while (randomNewAmount>9999){
-            randomNewAmount=Math.floor(Math.random (randomAmount) * 9999)+1000;
+            randomNewAmount = Math.floor(Math.random (randomAmount) * 9999)+1000;
         }
-        document.getElementById("random-number").value=randomNewAmount;
+        document.getElementById("random-number").value = randomNewAmount;
         });
 
      
 
         // input pin number
         function getNumber(num){
-            var inputArea=document.getElementById("input-area");
+            var inputArea = document.getElementById("input-area");
             switch(num){
                 case 1:inputArea.value += '1';
                 break;
@@ -108,30 +108,30 @@
 
         // clear the area
         function clearScreen(){
-            document.getElementById("input-area").value="";
+            document.getElementById("input-area").value = "";
         }
         
         // backspace
         function backSpace(){
-            var inputArea =document.getElementById("input-area").value;
+            var inputArea = document.getElementById("input-area").value;
             var backSpace = inputArea .slice(0, inputArea.length-1);
             document.getElementById("input-area").value = backSpace;
         }
 
         // submit button
-        const submitBtn= document.getElementById("submit-area");
+        const submitBtn = document.getElementById("submit-area");
         submitBtn.addEventListener('click',function(){
         const inputArea = document.getElementById("input-area").value;
         const newInputArea = parseFloat(inputArea);
         const pinNUmber = document.getElementById("random-number").value;
         const newPinNUmber = parseFloat(pinNUmber); 
         if(newInputArea==newPinNUmber){
-         document.getElementById("match-up").style.display="block";
-         document.getElementById("unequal").style.display="none";
+         document.getElementById("match-up").style.display = "block";
+         document.getElementById("unequal").style.display = "none";
         }
         if(newInputArea!=newPinNUmber){
-         document.getElementById("unequal").style.display="block";
-         document.getElementById("match-up").style.display="none";
+         document.getElementById("unequal").style.display = "block";
+         document.getElementById("match-up").style.display = "none";
         }
         });     
     </script>
