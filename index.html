@@ -6,53 +6,134 @@
     <title>Pin Generator</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+  
 </head>
 <body>
     <div class="container">
         <div class="row">
             <div class="col-md-6">
                 <div class="pin-generator half-width">
-                    <input class="form-control" type="text">
-                    <button class="generate-btn">Generate Pin</button>
+                    <input id="random-number" class="form-control" type="text" value=>
+                    <button id="generate-pin" class="generate-btn">Generate Pin</button>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="input-section half-width">
-                    <input class="form-control" type="text">
+                    <input id="input-area" class="form-control" type="text">
                     <div class="numbers">
                         <div class="calc-body">
                             <div class="calc-button-row">
-                              <div class="button">7</div>
-                              <div class="button">8</div>
-                              <div class="button">9</div>
+                              <div onclick="getNumber(7)" class="button">7</div>
+                              <div onclick="getNumber(8)"class="button">8</div>
+                              <div onclick="getNumber(9)" class="button">9</div>
                             </div>
                             <div class="calc-button-row">
-                              <div class="button">4</div>
-                              <div class="button">5</div>
-                              <div class="button">6</div>
+                              <div onclick="getNumber(4)" class="button">4</div>
+                              <div onclick="getNumber(5)" class="button">5</div>
+                              <div onclick="getNumber(6)" class="button">6</div>
                             </div>
                             <div class="calc-button-row">
-                              <div class="button">1</div>
-                              <div class="button">2</div>
-                              <div class="button">3</div>
+                              <div onclick="getNumber(1)" class="button">1</div>
+                              <div onclick="getNumber(2)" class="button">2</div>
+                              <div onclick="getNumber(3)" class="button">3</div>
                             </div>
                             <div class="calc-button-row">
-                                <div class="button"><</div>
-                                <div class="button">0</div>
-                                <div class="button">C</div>
+                                <div onclick="backSpace()" class="button"><</div>
+                                <div onclick="getNumber(0)" class="button">0</div>
+                                <div onclick="clearScreen()" class="button">C</div>
                             </div>
                             <div>
-                                <button type="submit" class="submit-btn">Submit</button>
-                                <p class="action-left">3 try left</p>
+                                <button id="submit-area" type="submit" class="submit-btn">Submit</button>
+                                <p  class="action-left">3 try left</p>
                             </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="notify-section">
-            <p class="notify">❌ Pin Didn't Match, Please try again</p>
-            <p class="notify">✅ Pin Matched... Secret door is opening for you</p>
+        <div id="notify-area" class="notify-section">
+            <p id="unequal" class="notify">❌ Pin Didn't Match, Please try again</p>
+            <p id="match-up" class="notify">✅ Pin Matched... Secret door is opening for you</p>
         </div>
     </div>
+  </div>
+</div>
+   
+
+    <script>
+
+        // hide notify area
+        document.getElementById("match-up").style.display= "none";
+        document.getElementById("unequal").style.display="none";
+
+        // generate pin
+        const generateBtn= document.getElementById("generate-pin");
+        generateBtn.addEventListener("click", function(){
+        const randomNumber=document.getElementById("random-number").value;
+        const randomAmount=parseFloat(randomNumber);
+        let randomNewAmount= Math.floor(Math.random (randomAmount) * 9999)+1000;
+        while (randomNewAmount>9999){
+            randomNewAmount=Math.floor(Math.random (randomAmount) * 9999)+1000;
+        }
+        document.getElementById("random-number").value=randomNewAmount;
+        });
+
+     
+
+        // input pin number
+        function getNumber(num){
+            var inputArea=document.getElementById("input-area");
+            switch(num){
+                case 1:inputArea.value += '1';
+                break;
+                case 2:inputArea.value += '2';
+                break;
+                case 3:inputArea.value += '3';
+                break;
+                case 4:inputArea.value += '4';
+                break;
+                case 5:inputArea.value += '5';
+                break;
+                case 6:inputArea.value += '6';
+                break;
+                case 7:inputArea.value += '7';
+                break;
+                case 8:inputArea.value += '8';
+                break;
+                case 9:inputArea.value += '9';
+                break;
+                case 0:inputArea.value += '0';
+                break;
+            }
+        }
+
+        // clear the area
+        function clearScreen(){
+            document.getElementById("input-area").value="";
+        }
+        
+        // backspace
+        function backSpace(){
+            var inputArea =document.getElementById("input-area").value;
+            var backSpace = inputArea .slice(0, inputArea.length-1);
+            document.getElementById("input-area").value = backSpace;
+        }
+
+        // submit button
+        const submitBtn= document.getElementById("submit-area");
+        submitBtn.addEventListener('click',function(){
+        const inputArea = document.getElementById("input-area").value;
+        const newInputArea = parseFloat(inputArea);
+        const pinNUmber = document.getElementById("random-number").value;
+        const newPinNUmber = parseFloat(pinNUmber); 
+        if(newInputArea==newPinNUmber){
+         document.getElementById("match-up").style.display="block";
+         document.getElementById("unequal").style.display="none";
+        }
+        if(newInputArea!=newPinNUmber){
+         document.getElementById("unequal").style.display="block";
+         document.getElementById("match-up").style.display="none";
+        }
+        });     
+    </script>
 </body>
 </html>
