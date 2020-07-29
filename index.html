@@ -44,7 +44,7 @@
                             </div>
                             <div>
                                 <button id="submit-area" type="submit" class="submit-btn">Submit</button>
-                                <p  class="action-left">3 try left</p>
+                                <p  class="action-left"> <span id="left"> 3</span> try left</p>
                             </div>
                     </div>
                 </div>
@@ -125,15 +125,23 @@
         const newInputArea = parseFloat(inputArea);
         const pinNUmber = document.getElementById("random-number").value;
         const newPinNUmber = parseFloat(pinNUmber); 
-        if(newInputArea==newPinNUmber){
+        const tryLeft = document.getElementById('left');
+        const tryCount = parseFloat(tryLeft.innerText);
+        if(newInputArea == newPinNUmber){
          document.getElementById("match-up").style.display = "block";
          document.getElementById("unequal").style.display = "none";
         }
-        if(newInputArea!=newPinNUmber){
+        if(newInputArea != newPinNUmber && tryCount > 0){
          document.getElementById("unequal").style.display = "block";
          document.getElementById("match-up").style.display = "none";
+        const tryNewCount = tryCount - 1;
+        tryLeft.innerText = tryNewCount;
+        document.getElementById('left').innerText = tryNewCount;
+      
         }
-        });     
+        document.getElementById("input-area").value = "";
+        });  
+     
     </script>
 </body>
 </html>
